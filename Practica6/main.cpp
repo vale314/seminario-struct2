@@ -10,6 +10,7 @@ Ejerciosio N°10
 */
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include "lsl.h"
 #include "alumno.h"
 
@@ -22,16 +23,27 @@ void mostrar();
 void intercalar();
 void head();
 void vaciar(size_t band, LSL<Alumno> &list);
+void buscar();
+void guardar();
+void cargar();
+
+struct AlumnoS{
+    string nombre;
+    string edad;
+    string sexo;
+};
 
 enum opc{
     opc_alta=1,
     opc_consulta,
     opc_intercalar,
+    opc_buscar,
     opc_salir
 };
 
 int main()
 {
+    cargar();
     string opc;
     while(true){
         system("cls");
@@ -39,6 +51,7 @@ int main()
            <<opc_alta<<") Alta de Alumno"<<endl
           <<opc_consulta<<") Consulta General"<<endl
          <<opc_intercalar<<") Intercalar"<<endl
+        <<opc_buscar<<") Buscar"<<endl
         <<opc_salir<<") Salir"<<endl
         <<">> ";
         getline(cin,opc);
@@ -57,11 +70,72 @@ int main()
                 cout<<"No hay elementos en la lista"<<endl;
             }
         }else if(opc=="4"){
-            break;
+            if(not lista_aumno.empty()){
+                buscar();
+            }else{
+                cout<<"No hay elemntos en la lista"<<endl;
+            }
+        }else if(opc=="5"){
+          guardar();
+          cout<<"Salir"<<endl;
+          break;
+        }else{
+            cout<<"Opcion incorrecta"<<endl;
         }
         system("pause");
     }
     return 0;
+}
+
+void cargar(){
+    AlumnoS alumnoS;
+    Alumno alumno;
+    ifstream entrada("salida.txt",ios::in);
+        if(!entrada.good()){
+            cout<<"Error Al Abrir"<<endl;
+            system("pause");
+            return;
+        }
+        while (!entrada.eof()) {
+            getline(entrada,alumnoS.nombre,'|');
+            getline(entrada,alumnoS.edad,'|');
+            getline(entrada,alumnoS.sexo,';');
+            if(entrada.eof())
+                break;
+            alumno.setNombre(alumnoS.nombre);
+            alumno.setEdad(atoi(alumnoS.edad.c_str()));
+            alumno.setSexo(alumnoS.sexo);
+            lista_aumno.push_back(alumno);
+        }
+
+    entrada.close();
+}
+
+void guardar(){
+    ofstream salida("salida.txt",ios::out|ios::trunc);
+    for(size_t i=0;i<lista_aumno.size();i++){
+        salida<<lista_aumno[i].getNombre()<<"|"<<lista_aumno[i].getEdad()<<"|"<<lista_aumno[i].getSexo()<<";";
+    }
+    salida.close();
+}
+
+void buscar(){
+    system("cls");
+    string nombre;
+    size_t i;
+    bool encontrado=false;
+    cout<<"Nombre De Alumno A Buscar"<<endl;
+    getline(cin,nombre);
+    for(i=0;i<lista_aumno.size();i++){
+        if(nombre==lista_aumno[i].getNombre()){
+            encontrado=true;
+            break;
+        }
+    }
+    if(encontrado)
+        cout<<lista_aumno[i]<<endl;
+    else
+        cout<<"No Se Pudo Encontrar"<<endl;
 }
 
 void alta()
