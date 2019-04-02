@@ -52,8 +52,15 @@ void Empresa::alta()
    cout<<"Ingrese el Nombre"<<endl;
    getline(cin,nombre);
 
-   cout<<"Numero de seguro Social"<<endl;
-   cin>>nss;
+   bool band=false;
+   do{
+       if(!band)
+        cout<<"Numero de seguro Social"<<endl;
+       else
+           cout<<"Repetido Numero Seguro"<<endl<<"Ingrese nuevo Seguro Social"<<endl;
+        cin>>nss;
+        band=true;
+   }while(buscarId(nss));
 
    system("cls");
    cout<<"1-Trabaja \t0-No"<<endl<<endl;
@@ -74,6 +81,7 @@ void Empresa::alta()
    InsertarOrdenado(empAux);
    asignar(empAux,dias);
 }
+
 
 
 void Empresa::asignar(Empleado emp,bool dias[7])
@@ -161,5 +169,14 @@ void Empresa::InsertarOrdenado(Empleado empAux)
         }
     }
     trabajadores.push_back(empAux);
+}
+
+bool Empresa::buscarId(int id)
+{
+    for(size_t i=0;i<trabajadores.size();i++){
+        if(trabajadores[i].getNss()==id)
+            return true;
+    }
+    return false;
 }
 

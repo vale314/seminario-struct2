@@ -43,6 +43,8 @@ public:
     void cambiarDia();
 
     void InsertarOrdenado(Empleado);
+
+    bool buscarId(int);
 };
 
 #endif // EMPRESA_H
