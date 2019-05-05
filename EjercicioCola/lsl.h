@@ -41,7 +41,7 @@ public:
     void push_front(const T& elem);
     void push_back(const T& elem);
     const T& fornt() const;
-    const T& back() const;
+    const T& back();
     void pop_front();
     void pop_back();
     void insert(size_t position, const T& elem);
@@ -108,7 +108,7 @@ const T &LSL<T>::fornt() const
 }
 
 template<typename T>
-const T &LSL<T>::back() const
+const T &LSL<T>::back()
 {
     if(empty())
         throw invalid_argument("back() on empty list");

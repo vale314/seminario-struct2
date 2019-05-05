@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <conio.h>
+#include <fstream>
 
 #include "empleado.h"
 #include "lsl.h"
@@ -45,6 +46,10 @@ public:
     void InsertarOrdenado(Empleado);
 
     bool buscarId(int);
+
+    void guardar();
+
+    void cargar();
 };
 
 #endif // EMPRESA_H

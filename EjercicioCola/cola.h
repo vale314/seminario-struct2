@@ -14,9 +14,10 @@ public:
     bool empty() const;
     size_t size() const;
     const T& front() const;
-    const T& back() const;
+    const T& back();
     void push(const T& elem);
     void pop();
+    void popBack();
 private:
     LSL<T> lista;
 };
@@ -43,7 +44,7 @@ const T &Cola<T>::front() const
 }
 
 template<typename T>
-const T &Cola<T>::back() const
+const T &Cola<T>::back()
 {
      if(empty())
          throw invalid_argument("back() on empty queue");
@@ -60,4 +61,10 @@ template<typename T>
 void Cola<T>::pop()
 {
     lista.pop_front();
+}
+
+template<typename T>
+void Cola<T>::popBack()
+{
+    lista.pop_back();
 }

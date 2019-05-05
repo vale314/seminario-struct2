@@ -39,6 +39,7 @@ void Empresa::menu()
             break;
         }
     }while(opc!=menuSalir);
+    guardar();
 }
 
 void Empresa::alta()
@@ -178,5 +179,38 @@ bool Empresa::buscarId(int id)
             return true;
     }
     return false;
+}
+
+void Empresa::guardar()
+{
+    Empleado empAux;
+    empAux.setNombre("###");
+    empAux.setNss(000);
+    empAux.setTotal(0);
+
+    fstream salidaT("trabajadores.txt",ios::out);
+    if(!salidaT.good()){
+        cout<<"Error Al Crear El Archivo"<<endl;
+        return;
+    }
+    for(size_t i=0;i<trabajadores.size();i++){
+        salidaT.write(reinterpret_cast<char *>(&trabajadores[i]),sizeof(Empleado));
+    }
+    salidaT.close();
+
+    fstream salidaD("dias.txt",ios::out);
+    if(!salidaD.good()){
+        cout<<"Error Al Crear Al Archivo"<<endl;
+        return;
+    }
+    for(int i=0;i<7;i++){
+        while(!diasCola[i].empty()){
+            salidaD.write(reinterpret_cast<const char*>(&diasCola[i].back()),sizeof (Empleado));
+            diasCola[i].back();
+            diasCola[i].popBack();
+        }
+        salidaD.write(reinterpret_cast<char*>(&empAux),sizeof (Empleado));
+    }
+    salidaD.close();
 }
 
