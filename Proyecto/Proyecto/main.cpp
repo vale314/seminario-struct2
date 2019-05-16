@@ -3,9 +3,9 @@
 using namespace std;
 
 typedef const char nomArch;
-nomArch* fichero = "origen";
-nomArch* fileAux1 = "auxiliar1";
-nomArch* fileAux2 = "auxiliar2";
+nomArch* fichero = "origen.txt";
+nomArch* fileAux1 = "auxiliar1.txt";
+nomArch* fileAux2 = "auxiliar.txt";
 
 
 void distribuir(nomArch* nf, nomArch* nf1, nomArch* nf2, int lonSec, int
@@ -70,7 +70,6 @@ void distribuir(nomArch* nf, nomArch* nf1, nomArch* nf2, int lonSec, int numReg)
     subSecuencia(f, f2, resto);
     f1.close(); f2.close(); f.close();
 
-    system("pause");
  }
 
 void subSecuencia(ifstream &f, ofstream &t, int longSec)
@@ -119,13 +118,13 @@ void mezclar(nomArch *nf1, nomArch *nf2, nomArch *nf, int& lonSec, int numReg)
             int actual;
             if (reg1 < reg2)
             {
-              actual = n1;
+              actual = reg1;
               f1 >> reg1;
               i++;
             }
             else
             {
-              actual = n2;
+              actual = reg2;
               f2 >> reg2;
               j++;
             }
