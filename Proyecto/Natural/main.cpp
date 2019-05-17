@@ -6,6 +6,9 @@
 
 using namespace std;
 
+int cantidadDatos();
+int obtenerCantElemAux1();
+int obtenerCantElemAux2();
 
 
 int  cantidadDatos(){
@@ -27,7 +30,7 @@ void writeNum(){
 
     ofstream original("original.txt",ios::out);
     srand(time(NULL));
-    int num=15;
+    int num=14;
     int dato=0;
     string space=" ";
 
@@ -54,9 +57,10 @@ void dividir(){
     char coma=',';
     int num2;
     while(cantidad){
+
         original.read(reinterpret_cast<char*>(&num2),sizeof (int));
         cantidad--;
-        if(num1<num2){
+        if(num1<=num2){
             file1Aux.write(reinterpret_cast<char*>(&num1),sizeof(int));
             file1Aux.write(reinterpret_cast<char*>(&space),sizeof (char));
             num1=num2;
@@ -72,13 +76,22 @@ void dividir(){
                 cantidad--;
             }
         }
-        if(cantidad==0)
-            file1Aux.write(reinterpret_cast<char*>(&num1),sizeof (int));
+
     }
+    cout<<"num1: "<<num1<<endl;
+    cout<<"num2: "<<num2<<endl;
 
     original.close();
     file1Aux.close();
     file2Aux.close();
+
+    if(obtenerCantElemAux1()+obtenerCantElemAux2()<cantidadDatos()){
+        ofstream file1Aux("aux1.txt",ios::app);
+        file1Aux.write(reinterpret_cast<char*>(&num1),sizeof (int));
+        file1Aux.write(reinterpret_cast<char*>(&coma),sizeof(char));
+        file1Aux.close();
+
+    }
 }
 
 
@@ -142,9 +155,7 @@ void mostrarAux2(){
     fileAux2.close();
 }
 
-int obtenerCantElemAux1(int cantAux=0){
-    long long pos;
-    pos=(sizeof (int)+sizeof (char))*cantAux;
+int obtenerCantElemAux1(){
 
     int cant=0;
     int dato=0;
@@ -156,28 +167,21 @@ int obtenerCantElemAux1(int cantAux=0){
         return -1;
     }
 
-    fileAux1.seekg(pos);
-
     while(!fileAux1.eof()){
         fileAux1.read(reinterpret_cast<char*>(&dato),sizeof (int));
         fileAux1.read(reinterpret_cast<char*>(&coma),sizeof(char));
 
         if(fileAux1.eof())
             break;
-//        cout<<dato<<" "<<coma<<endl;
         cant++;
-        if(coma==',')
-            break;
+
     }
 
     fileAux1.close();
     return cant;
 }
 
-int obtenerCantElemAux2(int cantAux=0){
-    long long pos;
-    pos=(sizeof (int)+sizeof (char))*cantAux;
-
+int obtenerCantElemAux2(){
     int cant=0;
     int dato=0;
     char coma=' ';
@@ -188,18 +192,14 @@ int obtenerCantElemAux2(int cantAux=0){
         return -1;
     }
 
-    fileAux2.seekg(pos);
-
     while(!fileAux2.eof()){
         fileAux2.read(reinterpret_cast<char*>(&dato),sizeof (int));
         fileAux2.read(reinterpret_cast<char*>(&coma),sizeof(char));
 
         if(fileAux2.eof())
             break;
-//        cout<<dato<<" "<<coma<<endl;
         cant++;
-        if(coma==',')
-            break;
+
     }
 
     fileAux2.close();
@@ -412,12 +412,13 @@ void mezla(){
             if(aux1.eof())
                 break;
 
-            original.write(reinterpret_cast<char*>(&datoA2),sizeof (int));
+            original.write(reinterpret_cast<char*>(&datoA1),sizeof (int));
         }
     }
     original.close();
     aux1.close();
     aux2.close();
+
 }
 
 
@@ -437,6 +438,80 @@ int main()
   cout<<"Datos Original: "<<endl;
   mostrarOriginal();
   cout<<endl;
+
+  cout<<"Datos Aux1: "<<endl;
+  mostrarAux1();
+
+  cout<<endl;
+
+  cout<<"Datos Aux2: "<<endl;
+  mostrarAux2();
+  cout<<endl;
+
+  cout<<"Mezcla"<<endl;
+  mezla();
+  cout<<endl;
+
+  cout<<"Datos Originales"<<endl;
+  mostrarOriginal();
+  cout<<endl;
+
+  cout<<"**************"<<endl;
+
+  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
+  dividir();
+  cout<<endl;
+
+
+  cout<<"Datos Aux1: "<<endl;
+  mostrarAux1();
+
+  cout<<endl;
+
+  cout<<"Datos Aux2: "<<endl;
+  mostrarAux2();
+  cout<<endl;
+
+  cout<<"Mezcla"<<endl;
+  mezla();
+  cout<<endl;
+
+  cout<<"Datos Originales"<<endl;
+  mostrarOriginal();
+  cout<<endl;
+
+
+  cout<<"**************"<<endl;
+
+  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
+  dividir();
+  cout<<endl;
+
+
+  cout<<"Datos Aux1: "<<endl;
+  mostrarAux1();
+
+  cout<<endl;
+
+  cout<<"Datos Aux2: "<<endl;
+  mostrarAux2();
+  cout<<endl;
+
+  cout<<"Mezcla"<<endl;
+  mezla();
+  cout<<endl;
+
+  cout<<"Datos Originales"<<endl;
+  mostrarOriginal();
+  cout<<endl;
+
+
+  cout<<"**************"<<endl;
+
+  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
+  dividir();
+  cout<<endl;
+
 
   cout<<"Datos Aux1: "<<endl;
   mostrarAux1();
