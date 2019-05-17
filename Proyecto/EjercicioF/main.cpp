@@ -29,13 +29,10 @@ void mezclaDirecta(nomArch f)
     numReg = cuentaReg(f); // determina número de registros
     longSec = 1;
 
-    cout<<"hello"<<endl;
     while (longSec < numReg)
     {
-        cout<<"longSec: "<<longSec<<"numReg"<<numReg<<endl;
         distribuir(f, f1, f2, longSec, numReg);
         mezclar(f1, f2, f, longSec, numReg);
-        cout<<endl;
     }
 }
     // función que separa secuencias ordenadas de registros
@@ -45,9 +42,6 @@ void distribuir(nomArch nf, nomArch nf1, nomArch nf2, int lonSec, int numReg)
 
     numSec = numReg /(2*lonSec);
     resto = numReg %(2*lonSec);
-
-    cout<<"numSec: "<<numSec<<endl;
-    cout<<"resto: "<<resto<<endl;
 
     ifstream f(nf);
     ofstream f1(nf1);
