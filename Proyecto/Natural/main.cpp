@@ -409,12 +409,12 @@ int main()
 {
   writeNum();
   cout<<"Algoritmo Mezcla directa"<<endl;
+  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
 
   cout<<"Datos Original: "<<endl;
   mostrarOriginal();
   cout<<endl;
 
-  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
 
   dividir();
 
