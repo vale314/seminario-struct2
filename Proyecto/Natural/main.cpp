@@ -7,8 +7,14 @@
 using namespace std;
 
 int cantidadDatos();
+void writeNum();
+void dividir();
+void mostrarOriginal();
+void mostrarAux1();
+void mostrarAux2();
 int obtenerCantElemAux1();
 int obtenerCantElemAux2();
+void mezla();
 
 
 int  cantidadDatos(){
@@ -202,136 +208,6 @@ int obtenerCantElemAux2(){
 
     fileAux2.close();
     return cant;
-}
-
-int obtenerNumeroMenorFile1(int cantComa=0){
-
-    int cant=0;
-    int dato=0;
-    char coma=' ';
-
-    int dato1=0;
-    char coma1=' ';
-
-    int dato2=0;
-    char coma2=' ';
-
-
-    ifstream fileAux1("aux1.txt",ios::in);
-    if(!fileAux1.good()){
-        cout<<"Error Al Abrir Archivo"<<endl;
-        return -1;
-    }
-
-    while(!fileAux1.eof() && cantComa){
-        fileAux1.read(reinterpret_cast<char*>(&dato),sizeof (int));
-        fileAux1.read(reinterpret_cast<char*>(&coma),sizeof(char));
-
-        if(fileAux1.eof()){
-            cant=-1;
-            break;
-        }
-
-        if(coma==','){
-            cantComa--;
-            break;
-        }
-    }
-
-    if(cant<0){
-        //excede de comas
-        fileAux1.close();
-        return cant;
-    }
-
-    fileAux1.read(reinterpret_cast<char*>(&dato1),sizeof (int));
-    fileAux1.read(reinterpret_cast<char*>(&coma1),sizeof(char));
-
-    if(coma1==','){
-        fileAux1.close();
-        return dato1;
-    }
-    while(!fileAux1.eof()){
-        fileAux1.read(reinterpret_cast<char*>(&dato2),sizeof (int));
-        fileAux1.read(reinterpret_cast<char*>(&coma2),sizeof(char));
-
-        if(fileAux1.eof())
-            break;
-
-        if(dato2<dato1)
-            dato1=dato2;
-
-        if(coma2==',')
-            break;
-    }
-
-    fileAux1.close();
-    return dato1;
-}
-
-int obtenerNumeroMenorFile2(int cantComa=0){
-
-    int cant=0;
-    int dato=0;
-    char coma=' ';
-
-    int dato1=0;
-    char coma1=' ';
-
-    int dato2=0;
-    char coma2=' ';
-
-
-    ifstream fileAux2("aux2.txt",ios::in);
-    if(!fileAux2.good()){
-        cout<<"Error Al Abrir Archivo"<<endl;
-        return -1;
-    }
-
-    while(!fileAux2.eof() && cantComa){
-        fileAux2.read(reinterpret_cast<char*>(&dato),sizeof (int));
-        fileAux2.read(reinterpret_cast<char*>(&coma),sizeof(char));
-
-        if(fileAux2.eof()){
-            cant=-1;
-            break;
-        }
-
-        if(coma==','){
-            cantComa--;
-            break;
-        }
-    }
-
-    if(cant<0){
-        //excede de comas
-        fileAux2.close();
-        return cant;
-    }
-
-    fileAux2.read(reinterpret_cast<char*>(&dato1),sizeof (int));
-    fileAux2.read(reinterpret_cast<char*>(&coma1),sizeof(char));
-
-    if(coma1==','){
-        fileAux2.close();
-        return dato1;
-    }
-    while(!fileAux2.eof()){
-        fileAux2.read(reinterpret_cast<char*>(&dato2),sizeof (int));
-        fileAux2.read(reinterpret_cast<char*>(&coma2),sizeof(char));
-
-        if(fileAux2.eof())
-            break;
-
-        if(dato2<dato1)
-            dato1=dato2;
-
-        if(coma2==',')
-            break;
-    }
-
-    fileAux2.close();
-    return dato1;
 }
 
 void mezla(){
