@@ -78,8 +78,6 @@ void dividir(){
         }
 
     }
-    cout<<"num1: "<<num1<<endl;
-    cout<<"num2: "<<num2<<endl;
 
     original.close();
     file1Aux.close();
@@ -336,22 +334,6 @@ int obtenerNumeroMenorFile2(int cantComa=0){
     return dato1;
 }
 
-//void mezclar(){
-//    int cantidad=0;
-//    cantidad=cantidadDatos();
-//    int suma=0;
-//    int cantAux1=0;
-//    int cantAux2=0;
-//    do{
-//        cantAux1=obtenerCantElemAux1(cantAux1);
-//        cantAux2=obtenerCantElemAux1(cantAux2);
-//        ifstream fileAux1("aux1.txt",ios::in);
-
-//        fileAux1.close();
-
-//    }while();
-//}
-
 void mezla(){
     ofstream original("original.txt",ios::out);
     ifstream aux1("aux1.txt",ios::in);
@@ -388,7 +370,6 @@ void mezla(){
                 if(aux1.eof()){
                     break;
                 }
-                cout<<datoA2 <<" < "<<datoA1<<endl;
                 if(datoA2<=datoA1){
                     original.write(reinterpret_cast<char*>(&datoA2),sizeof (int));
                     datoA2=datoA1;
@@ -419,6 +400,8 @@ void mezla(){
     aux1.close();
     aux2.close();
 
+    ofstream auxO2("aux2.txt",ios::trunc);
+    auxO2.close();
 }
 
 
@@ -432,103 +415,18 @@ int main()
   cout<<endl;
 
   cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
+
   dividir();
-  cout<<endl;
 
-  cout<<"Datos Original: "<<endl;
-  mostrarOriginal();
-  cout<<endl;
-
-  cout<<"Datos Aux1: "<<endl;
-  mostrarAux1();
-
-  cout<<endl;
-
-  cout<<"Datos Aux2: "<<endl;
-  mostrarAux2();
-  cout<<endl;
-
-  cout<<"Mezcla"<<endl;
-  mezla();
-  cout<<endl;
+  do{
+      mezla();
+      dividir();
+  }while(obtenerCantElemAux2());
 
   cout<<"Datos Originales"<<endl;
   mostrarOriginal();
   cout<<endl;
 
   cout<<"**************"<<endl;
-
-  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
-  dividir();
-  cout<<endl;
-
-
-  cout<<"Datos Aux1: "<<endl;
-  mostrarAux1();
-
-  cout<<endl;
-
-  cout<<"Datos Aux2: "<<endl;
-  mostrarAux2();
-  cout<<endl;
-
-  cout<<"Mezcla"<<endl;
-  mezla();
-  cout<<endl;
-
-  cout<<"Datos Originales"<<endl;
-  mostrarOriginal();
-  cout<<endl;
-
-
-  cout<<"**************"<<endl;
-
-  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
-  dividir();
-  cout<<endl;
-
-
-  cout<<"Datos Aux1: "<<endl;
-  mostrarAux1();
-
-  cout<<endl;
-
-  cout<<"Datos Aux2: "<<endl;
-  mostrarAux2();
-  cout<<endl;
-
-  cout<<"Mezcla"<<endl;
-  mezla();
-  cout<<endl;
-
-  cout<<"Datos Originales"<<endl;
-  mostrarOriginal();
-  cout<<endl;
-
-
-  cout<<"**************"<<endl;
-
-  cout<<"Cantidad De DATOS: "<<cantidadDatos()<<endl;
-  dividir();
-  cout<<endl;
-
-
-  cout<<"Datos Aux1: "<<endl;
-  mostrarAux1();
-
-  cout<<endl;
-
-  cout<<"Datos Aux2: "<<endl;
-  mostrarAux2();
-  cout<<endl;
-
-  cout<<"Mezcla"<<endl;
-  mezla();
-  cout<<endl;
-
-  cout<<"Datos Originales"<<endl;
-  mostrarOriginal();
-  cout<<endl;
-
   cout<<"Se Mezclaron correctamente:"<<endl;
 }
